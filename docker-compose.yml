@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: smart_crop_db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - smart_crop_network
+
+  backend:
+    build: ./backend
+    container_name: smart_crop_backend
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - MONGODB_URI=mongodb://mongodb:27017/smart_crop
+      - JWT_SECRET=supersecretjwtsmartcropkey123
+      - NODE_ENV=production
+    depends_on:
+      - mongodb
+    networks:
+      - smart_crop_network
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        - VITE_API_URL=http://localhost:5000/api/auth
+    container_name: smart_crop_frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - smart_crop_network
+
+networks:
+  smart_crop_network:
+    driver: bridge
+
+volumes:
+  mongo_data:
