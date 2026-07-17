@@ -1,5 +1,7 @@
 # AgriSmart - Smart Crop & Agriculture Intelligence Platform
 
+[![Deploy to Render](https://render.com/images/deploy-to-render.svg)](https://render.com/deploy?repo=https://github.com/MGanesh09/smart-crop-analyzer)
+
 AgriSmart is a premium, responsive, and responsive agricultural platform built with React, Node.js, Express, MongoDB Atlas, and Tailwind CSS. It empowers farmers, agronomists, and administrators with intelligent telemetry monitoring, canopy diagnostics, crop scheduling calendars, and cost calculators.
 
 ## Core Features
