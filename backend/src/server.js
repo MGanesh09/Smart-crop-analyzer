@@ -45,7 +45,8 @@ app.get('/api/health', (req, res) => {
     status: 'OK', 
     message: 'API is running successfully',
     database: states[dbState] || 'UNKNOWN',
-    dbCode: dbState
+    dbCode: dbState,
+    error: global.dbError || null
   });
 });
 

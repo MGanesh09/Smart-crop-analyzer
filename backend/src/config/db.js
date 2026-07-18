@@ -10,8 +10,10 @@ const connectDB = async () => {
       connectTimeoutMS: 30000,
     });
     console.log(`MongoDB Connected: ${conn.connection.host}`);
+    global.dbError = null;
   } catch (error) {
     console.error(`Error connecting to MongoDB: ${error.message}`);
+    global.dbError = error.message;
     console.warn('WARNING: Running server without an active MongoDB connection. Mongoose operations will queue.');
   }
 };
