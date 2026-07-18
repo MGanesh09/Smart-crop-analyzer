@@ -1,3 +1,8 @@
+// Polyfill global crypto for MongoDB/dependencies that expect it
+if (!global.crypto) {
+  global.crypto = require('crypto');
+}
+
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
