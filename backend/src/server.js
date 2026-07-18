@@ -33,7 +33,20 @@ app.use('/api/admin', adminRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'OK', message: 'API is running successfully' });
+  const mongoose = require('mongoose');
+  const states = {
+    0: 'DISCONNECTED',
+    1: 'CONNECTED',
+    2: 'CONNECTING',
+    3: 'DISCONNECTING'
+  };
+  const dbState = mongoose.connection.readyState;
+  res.json({ 
+    status: 'OK', 
+    message: 'API is running successfully',
+    database: states[dbState] || 'UNKNOWN',
+    dbCode: dbState
+  });
 });
 
 // Home route
